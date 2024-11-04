@@ -1,0 +1,3 @@
+input:focus-visible{
+  outline: none; /*to see change immediately on the border*/
+}
