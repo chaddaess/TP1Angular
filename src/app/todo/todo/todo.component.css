@@ -1,0 +1,13 @@
+i{
+  margin: 0 1em;
+}
+.boxes{
+  display: flex;
+}
+.box{
+  margin-right: 1em;
+  width: 31%;
+}
+.box li{
+  margin-top: 1em;
+}

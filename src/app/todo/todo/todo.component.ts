@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import {Component, inject, signal, WritableSignal} from '@angular/core';
 import { Todo } from '../model/todo';
 import { TodoService } from '../service/todo.service';
 
@@ -14,18 +14,27 @@ import { FormsModule } from '@angular/forms';
 })
 export class TodoComponent {
   private todoService = inject(TodoService);
-
-  todos: Todo[] = [];
+  inProgressTodos=signal<Todo[]>([]);
+  completedTodos=signal<Todo[]>([]);
+  newTodos=signal<Todo[]>([])
   todo = new Todo();
   constructor() {
-    this.todos = this.todoService.getTodos();
   }
   addTodo() {
-    this.todoService.addTodo(this.todo);
+    this.todoService.addTodo(this.newTodos,this.todo);
     this.todo = new Todo();
   }
 
-  deleteTodo(todo: Todo) {
-    this.todoService.deleteTodo(todo);
+  deleteTodo(todo: Todo,list:WritableSignal<Todo[]>) {
+    console.log("component")
+    this.todoService.deleteTodo(list,todo);
   }
+
+  startTodo(todo:Todo){
+    this.todoService.startTodo(this.newTodos,this.inProgressTodos,todo)
+  }
+  completeToDo(todo:Todo){
+    this.todoService.completeTodo(this.inProgressTodos,this.completedTodos,todo)
+  }
+
 }
