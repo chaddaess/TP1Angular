@@ -12,8 +12,10 @@ import { AddCvComponent } from "./cv/add-cv/add-cv.component";
 import { CvComponent } from "./cv/cv/cv.component";
 import { DetailsCvComponent } from "./cv/details-cv/details-cv.component";
 import { RhComponent } from "./optimizationPattern/rh/rh.component";
+import {MagicTextComponent} from "./components/magic-text/magic-text/magic-text.component";
 
 const routes: Route[] = [
+  {path :"magic-text",component:MagicTextComponent},
   { path: "login", component: LoginComponent },
   { path: "rh", component: RhComponent },
   {

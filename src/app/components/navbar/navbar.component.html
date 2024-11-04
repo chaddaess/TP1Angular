@@ -67,6 +67,13 @@
                         routerLinkActive="active text-primary"
                         >Rh</a
                         >
+                      <a
+                        class="nav-link"
+                        [routerLink]="['magic-text']"
+                        routerLinkActive="active text-primary"
+                      >
+                        Magic Text
+                      </a>
                         @if (!authService.isAuthenticated()) {
                           <a
                             class="nav-link"
