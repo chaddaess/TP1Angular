@@ -13,9 +13,11 @@ import { CvComponent } from "./cv/cv/cv.component";
 import { DetailsCvComponent } from "./cv/details-cv/details-cv.component";
 import { RhComponent } from "./optimizationPattern/rh/rh.component";
 import {MagicTextComponent} from "./components/magic-text/magic-text/magic-text.component";
+import {TtcCalculatorComponent} from "./components/ttc-calculator/ttc-calculator.component";
 
 const routes: Route[] = [
   {path :"magic-text",component:MagicTextComponent},
+  {path:"ttc-calculator",component:TtcCalculatorComponent},
   { path: "login", component: LoginComponent },
   { path: "rh", component: RhComponent },
   {

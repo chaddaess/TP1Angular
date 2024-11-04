@@ -1,0 +1,17 @@
+.outputs{
+  margin-top: 1em;
+  display: flex;
+}
+.outputs div{
+  margin-right: 1em;
+}
+.inputs{
+  display: flex;
+  margin: 1em 0;
+  align-items: center;
+}
+.inputs input{
+  margin:0 2em;
+}
+
+

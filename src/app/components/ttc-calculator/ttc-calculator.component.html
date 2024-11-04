@@ -1,0 +1,16 @@
+<h4>TTC calculator</h4>
+<div class="inputs">
+  <label for="price">Price</label>
+  <input id="price"type="number" [(ngModel)]="price" class="form-control" min="0" step="1">
+
+  <label for="quantity">Quantity</label>
+  <input id="quantity"type="number" [(ngModel)]="quantity" class="form-control" min="1" step="1">
+
+  <label for="tva">TVA</label>
+  <input id="tva" type="number" [(ngModel)]="tva" class="form-control" min="0" step="1">
+</div>
+<div class="outputs">
+  <div class="alert alert-info">Unit Price TTC: {{unit_price_ttc().toFixed(2)}}</div>
+  <div class="alert alert-success">Total Price TTC:{{total_price_ttc().toFixed(2)}}</div>
+  <div class="alert alert-warning">Discount:{{discount()*100}} %</div>
+</div>
