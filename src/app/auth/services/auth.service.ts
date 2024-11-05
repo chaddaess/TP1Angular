@@ -26,7 +26,7 @@ export class AuthService {
   login(credentials: CredentialsDto): Observable<LoginResponseDto> {
     return this.http.post<LoginResponseDto>(API.login, credentials).pipe(
       tap(response=>{
-        localStorage.setItem(CONSTANTES.token, <string>this.authState().token);
+        localStorage.setItem(CONSTANTES.token,response.id);
         localStorage.setItem(CONSTANTES.email,credentials.email)
         localStorage.setItem(CONSTANTES.userId,response.userId.toString())
       })
