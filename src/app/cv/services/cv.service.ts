@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Cv } from "../model/cv";
-import { Observable, Subject } from "rxjs";
+import {debounce, debounceTime, Observable, Subject} from "rxjs";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { API } from "../../../config/api.config";
 
@@ -43,7 +43,9 @@ export class CvService {
    *
    */
   getCvs(): Observable<Cv[]> {
-    return this.http.get<Cv[]>(API.cv);
+    return this.http.get<Cv[]>(API.cv).pipe(
+      debounceTime(6000)
+    );
   }
 
   /**
@@ -55,11 +57,15 @@ export class CvService {
    *
    */
   deleteCvById(id: number): Observable<any> {
-    return this.http.delete<any>(API.cv + id);
+    return this.http.delete<any>(API.cv + id).pipe(
+      debounceTime(6000)
+    );
   }
 
   addCv(cv: Cv): Observable<Cv> {
-    return this.http.post<any>(API.cv, cv);
+    return this.http.post<any>(API.cv, cv).pipe(
+      debounceTime(6000)
+    );
   }
 
   /**
@@ -71,7 +77,9 @@ export class CvService {
    *
    */
   getCvById(id: number): Observable<Cv> {
-    return this.http.get<Cv>(API.cv + id);
+    return this.http.get<Cv>(API.cv + id).pipe(
+      debounceTime(6000)
+    );
   }
 
   /**
@@ -109,7 +117,9 @@ export class CvService {
   selectByName(name: string) {
     const search = `{"where":{"name":{"like":"%${name}%"}}}`;
     const params = new HttpParams().set("filter", search);
-    return this.http.get<any>(API.cv, { params });
+    return this.http.get<any>(API.cv, { params }).pipe(
+      debounceTime(6000)
+    );
   }
   /**
    * Recherche les cvs dont la valeur est égale à la chaine passée en paramètre
@@ -120,7 +130,9 @@ export class CvService {
   selectByProperty(property: string, value: string) {
     const search = `{"where":{"${property}":"${value}"}}`;
     const params = new HttpParams().set("filter", search);
-    return this.http.get<Cv[]>(API.cv, { params });
+    return this.http.get<Cv[]>(API.cv, { params }).pipe(
+      debounceTime(6000)
+    );
   }
 
   /**
