@@ -13,6 +13,7 @@ import {CONSTANTES} from "../../../config/const.config";
 })
 export class AuthService {
   private http = inject(HttpClient);
+  //we initialize with local storage content to  persist state on refresh
   private authState=signal<AuthState>({
       email:localStorage.getItem(CONSTANTES.email),
       userId:localStorage.getItem(CONSTANTES.userId),
@@ -20,6 +21,7 @@ export class AuthService {
       token:localStorage.getItem(CONSTANTES.token)
     }
   );
+
   constructor() {}
 
 
