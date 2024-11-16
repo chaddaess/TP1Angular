@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Cv } from '../model/cv';
-import { CvService } from '../services/cv.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { APP_ROUTES } from '../../../config/routes.config';
-import { AuthService } from '../../auth/services/auth.service';
+import {Component} from '@angular/core';
+import {Cv} from '../model/cv';
+import {CvService} from '../services/cv.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {APP_ROUTES} from '../../../config/routes.config';
+import {AuthService} from '../../auth/services/auth.service';
 import {catchError, Observable, of, tap} from "rxjs";
 
 @Component({
@@ -12,8 +12,9 @@ import {catchError, Observable, of, tap} from "rxjs";
   templateUrl: './details-cv.component.html',
   styleUrls: ['./details-cv.component.css'],
 })
-export class DetailsCvComponent  {
-  cv$:Observable<Cv>
+export class DetailsCvComponent {
+  cv$: Observable<Cv>
+
   constructor(
     private cvService: CvService,
     private router: Router,
@@ -22,24 +23,44 @@ export class DetailsCvComponent  {
     public authService: AuthService
   ) {
     const id = this.activatedRoute.snapshot.params['id'];
-    this.cv$=this.cvService.getCvById(+id).pipe(
+    this.cv$ = this.cvService.getCvById(+id).pipe(
       catchError(() => {
         // this.router.navigate([APP_ROUTES.cv]);
         return of(new Cv());
       })
     )
   }
+
+
   deleteCv(cv: Cv) {
-    return this.cvService.deleteCvById(cv.id).subscribe({
-      next: () => {
+    let obs$: Observable<Cv>;
+    obs$ = this.cvService.deleteCvById(cv.id).pipe(
+      tap(() => {
         this.toastr.success(`${cv.name} supprimé avec succès`);
         this.router.navigate([APP_ROUTES.cv]);
-      },
-      error: () => {
+      }),
+      catchError(() => {
         this.toastr.error(
           `Problème avec le serveur veuillez contacter l'admin`
         );
-      },
-    });
+        return of(new Cv());
+      })
+    )
+    obs$.subscribe()
   }
+
+
+  // deleteCv(cv: Cv) {
+  //   return this.cvService.deleteCvById(cv.id).subscribe({
+  //     next: () => {
+  //       this.toastr.success(`${cv.name} supprimé avec succès`);
+  //       this.router.navigate([APP_ROUTES.cv]);
+  //     },
+  //     error: () => {
+  //       this.toastr.error(
+  //         `Problème avec le serveur veuillez contacter l'admin`
+  //       );
+  //     },
+  //   });
+  // }
 }

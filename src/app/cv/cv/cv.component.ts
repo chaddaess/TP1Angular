@@ -37,7 +37,6 @@ export class CvComponent {
     )
 
     this.selectedCv$=this.cvService.selectCv$
-
     this.logger.logger("je suis le cvComponent");
     this.toastr.info("Bienvenu dans notre CvTech");
   }
